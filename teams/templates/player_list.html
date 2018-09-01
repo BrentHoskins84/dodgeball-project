@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+    {% extends "base/base.html" %}
+        {% block body_block %}
+            <h2>List of Players</h2>
+            <div class="list-group">
+                <ol>
+                    {% for player in object_list %}
+                        <li>{{ player.first_name }} &nbsp;</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        {% endblock %}

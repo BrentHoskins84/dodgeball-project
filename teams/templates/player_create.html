@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+    {% extends "base/base.html" %}
+        {% block body_block %}
+            {% load bootstrap4 %}
+            {% bootstrap_messages %}
+                <br>
+                <h2>Player</h2>
+                <form method="post" class="form">
+                  {% csrf_token %}
+                  {% bootstrap_form form layout='inline' %}
+                  {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                      Submit
+                    </button>
+                  {% endbuttons %}
+                </form>
+        {% endblock %}

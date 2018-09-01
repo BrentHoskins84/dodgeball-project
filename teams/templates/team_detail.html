@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+    {% extends "base/base.html" %}
+        {% block body_block %}
+        <div class="list-group">
+            <div class="d-flex w-100">
+                <h1 class="mb-1">{{ object.name }}</h1>
+            </div>
+                <h5>{{ object.passcode.passcode }}</h5>
+                <ol>
+                    {% for player in object.players.all %}
+                        <li>{{ player.first_name }}</li>
+                    {% endfor %}
+                </ol>
+
+
+        </div>
+
+        {% endblock %}
+
+        <!-- {% for player in team.players.all %}
+            <li>{{ player.first_name }} &nbsp;</li>
+        {% endfor %} -->

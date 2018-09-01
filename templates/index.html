@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>SAMS II DodgeBall</title>
+
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+        <style media="screen">
+
+            body{
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+            }
+
+            .jumbotron{
+
+                background-image: url({% static 'images/uncle-sam2.jpg' %});
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+            }
+
+            .jumbotron h1, p {
+                /* margin-left: 2rem; */
+                color: black;
+                font-weight: bold;
+            }
+            .jumbotron button{
+                margin-left: 2rem;
+            }
+
+            .lead{
+                color: black;
+                font-weight: bold;
+            }
+
+            .numberCircle {
+                margin-left: 10rem;
+                border-radius: 50%;
+                behavior: url(PIE.htc);
+                width: 10rem;
+                height: 10rem;
+                padding: 2px;
+                background: #fff;
+                border: 5px solid #666;
+                color: #666;
+                text-align: center;
+                font: 128px Arial, sans-serif;
+            }
+
+            /* ul {
+                list-style-type: square;
+                margin: .5em 0 1em 3em;
+                padding: 0;
+                padding-left: 2em;
+            } */
+        </style>
+
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <a class="navbar-brand" href="{% url 'index' %}">SAMS II</a>
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Brackets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="{% url 'teams:team-list' %}">Teams</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav form-inline">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'admin:index' %}">ADMIN</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="container">
+            <div class="jumbotron jumbotron">
+                <h1 class="display-4">SAMS II / Rising 6 / Top 3 </h1>
+                <h1 class="display-4">DodgeBall Tournament</h1>
+                <p class="lead">"If you can dodge a wrench, you can dodge a ball." - Patches O'Houlihan</p>
+                <hr class="my-4">
+                <p>The US Contingent would like to invite you to join us for a International DodgeBall Tournament.</p>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#team_modal">SIGN UP</button>
+            </div>
+        </div>
+
+        <div class="modal fade" id="team_modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                       <h5 class="modal-title">Create or Join Team</h5>
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                       </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container" align='center'>
+                            <a class="btn btn-primary btn-popup" href="{% url 'teams:player-create' %}">Join Team</a>
+                            <a class="btn btn-primary btn-popup" href="{% url 'teams:team-create' %}">Create Team</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <div class="card-body d-flex flex-column align-items-start">
+                        <strong class="d-inline-block mb-2 text-primary">Teams</strong>
+                        <h3 class="mb-0">
+                            <a class="text-dark" href="{% url 'teams:team-list' %}">Total Teams</a>
+                        </h3>
+                        <div class="numberCircle"> {{ team|length }}</div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card-body d-flex flex-column align-items-start">
+                        <strong class="d-inline-block mb-2 text-primary">Players</strong>
+                        <h3 class="mb-0">
+                            <a class="text-dark" href="{% url 'teams:player-list' %}">Total Players</a>
+                        </h3>
+                        <div class="numberCircle">{{ player|length }} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div role="main" class="container">
+            <div class="row">
+                <div class="col-md-8 blog-main">
+                    <h3 class="pb-3 mb-4 font-italic border-bottom">OFFICIAL DODGEBALL RULES</h3>
+                    <div class="blog-post">
+                        <iframe style="margin-left: 3rem;" width="400" height="300" src="https://www.youtube.com/embed/bJ1vEQKX-hE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <p class="blog-post-meta">
+                            <a href="http://playdodgeball.org/official-dodgeball-rules/">INTERNATIONAL DODGEBALL ASSOCIATION</a>
+                        </p>
+                        <p class="blog-post-meta">
+                            Version 2.3; August 31, 2015
+                        </p>
+                        <p>The Official Dodgeball Rules listed below have been constantly refined over the past 10 years to produce a style of dodgeball that is fast-paced, exciting, and fun. Feel free to use these dodgeball rules in your dodgeball activities. The Dodgeball Rules have a Creative Commons license, thus, please attribute the work properly. For the purpose of simplifying the language of the rules, all players, both male and female, will be represented with masculine pronouns.</p>
+                        <hr>
+                        <h2>GLOSSARY</h2>
+                        <p>
+                            •    Dead ball: A ball that hits an object, surface, or teammate before the player, or a ball declared as a dead ball by the referee.
+                            <br>
+                            •    Live ball: A ball that has been activated (see <em>General Rules #5</em>).
+                            <br>
+                            •    Match: A match is a series of games played against a team.
+                            <br>
+                            •    Trap : When a player makes a catch using another surface or object (ground, wall, teammate) (see <em>Catch #6</em>).
+                            <br>
+                            •    In: Being eligible to participate in the game on court.
+                            <br>
+                            •    Out: Being ineligible to play in the game as a result of being hit, caught, or being out of bounds.
+                            <br>
+                            •     Opening Rush: When players approach the centerline to retrieve the  balls at the signal of the referee (see <em>General Rule #3</em>).
+                            <br>
+                            •    Full Control: A player is in full control of a ball if he is able to release the ball in an obvious and deliberate action.
+                            <br>
+                            •    Reset: An attempt to stop the ball count in order to prolong possession (see <em>Dead ball #7</em>). Any ball thrown above 6FT, or clearly out of reach of every live player on an opposing team is a dead ball, and must be turned over.
+                            <br>
+                            •    Reach: Regarding resets, one relative arm's length from a defending player's torso, plus any evasive motions of the player.
+                        </p>
+                        <hr>
+                        <h2>GENERAL RULES</h2>
+                        <p>1.  Maximum of 6 players and a minimum of 2 females (one of which must be  from the team’s roster) on each team at the start of the game.</p>
+                        <p>2. 6 standard IDA-approved balls (8.25” foam balls)  are placed on the centerline in two groups of 3. Each group of 3 is  placed at opposite ends of the centerline, in front of the referees.</p>
+                        <p>3. Opening Rush: Players must be touching the back wall at the start of the game. After the starting countdown of  “3, 2, 1 Dodgeball!” teams approach the centerline to retrieve the  balls (see <em>Other Details #3</em>).</p>
+                        <p>4. Teams can only take the 3 balls to their right initially (see <em>Technical #2</em>).</p>
+                        <p>5. Balls must touch the back wall before they are live. The ball is dead otherwise.</p>
+                        <p>6.  Players attempt to eliminate opponents by hitting them with balls or  catching their throws. If a player is hit with a live ball, that player  is out.</p>
+                        <p>7.  Eliminated players line up against the designated wall or on the  sideline, which is to be announced at the start of the games, next to  the referees, according to the order of elimination.</p>
+                        <p>8. Players are to play by the honour system. If in doubt, player should call themselves out. (see <em><a href="http://vdldodgeball.ca/league/officiating-guidelines">Officiating Guidelines – Main Responsibilities #6</a></em>)</p>
+                        <p>9. Play continues until one team is eliminated.</p>
+                        <p>10. Referee can pause the game at any point by saying, "Stop." At that point, all events after and during are void.</p>
+                        <ul style="list-style-type: square; margin: .5em 0 1em 3em; padding: 0; padding-left: 2em; color: black; font-weight: bold;">
+                            <li>The game restarts with remaining players against their respective walls with ball possession retained, but all ball counts are restarted.</li>
+                            <li>All balls on the ground remain where they lay.</li>
+                            <li>Referees restart the game by a countdown of "3, 2, 1, Dodgeball!"</li>
+                        </ul>
+                        <hr>
+                        <h2>RULES OF PLAY</h2>
+                        <p><strong>BOUNDARIES</strong></p>
+                        <p>1.  Players are not allowed to make contact with any boundary or out of bounds area during game play; they will be called out.</p>
+                        <p>2. During the opening rush, players may cross the centerline.</p>
+                        <p>3. All parts of a player's person, including all parts of his body, clothing, or balls in possession are considered when determining if contact has been made. Garments falling off of a player, and crossing a boundary (e.g. shoes, hats) do not make the player out.</p>
+                        <p>4. Kamikaze plays: Players are not allowed to deliberately cross the   centerline to make a play, they will automatically be called out.&nbsp;</p>
+                        <ul style="list-style-type: square; margin: .5em 0 1em 3em; padding: 0; padding-left: 2em; color: black; font-weight: bold;">
+                            <li>A player who jumps across the line to throw: the thrown ball will not count; however, if caught, will be considered a catch.</li>
+                            <li>A player who crosses the line in an attempt to disrupt an opponent's catch: the opponent's catch will be considered successful, regardless of outcome. </li>
+                        </ul>
+                        <p>5. The use of the apparatus, or the alcoves in the gyms during the games  is illegal. &nbsp;Players in violation will be considered out.</p>
+                        <p>6.  Balls that go out of bounds are to be returned to where they became  out  of bounds, or stopped on the sidelines before they go out of  bounds. If  the initial out of bounds location can’t be determined, then  the balls  should be placed on the centerline.</p>
+                        <p><strong>HIT</strong></p>
+                        <p>1.  A player is considered hit only if there is direct contact with a live  ball released by the opposing team (except for a Failed Block, see <em>Blocking #2</em>).</p>
+                        <p>2.  Hit etiquette: If a player is hit, he should drop all held balls, raise  his arm to signal that he is out, and leave the court immediately and  minimize gameplay disruption. (Once on the sidelines, knocked-out  players are not allowed to kick or pass balls to their teammates. This  is illegal and will result in the ball being turned over to the opposing  team).</p>
+                        <p>3.  Headshots: To simplify the game, all headshots count. However, we do  not condone intentional headshots. Gym Leads reserve the right to  discipline players if there are repeated violations or if the single  violation is severe (see <em><a href="http://playdodgeball.org/codeofconduct/">Code of Conduct</a></em>).</p>
+                        <p>4. If in doubt, players should call themselves out (AKA “If in doubt, you are out”).</p>
+                        <p>5. A player is not out from a hit until the thrown ball touches another object or surface.<br><br><strong>CATCH</strong></p>
+                        <p>1. A catch is when a player retains full control of a ball released by an opponent. While possession does not require  both feet on the ground, the player must land with both feet, or any other part of his body inbounds (see <em>Technical #4</em>). &nbsp;This includes catching balls going out of bounds.</p>
+                        <p>2.  If a player catches a ball thrown by an opponent, the thrower is out  and one player returns to the catcher’s side in the order of first out,  first in.</p>
+                        <p>3.  In order to be eligible to return to the game, the player who is out  must be at the wall or sideline next to the designated referee before a  teammate makes a catch to bring him back in. The intention of this rule  is to ensure that the player being brought back in was clearly hit out  prior to the catch (see <em>Technical #11, #12</em>).</p>
+                        <p>4.  Returning players after a catch: Returning players must go straight to  any part of their own back wall, and touch the wall to be reactivated.</p>
+                        <ol style="margin-top: 0pt; margin-bottom: 0pt;"> </ol>
+                        <ol  style="list-style-type: square; margin: .5em 0 1em 3em; padding: 0; padding-left: 2em; color: black; font-weight: bold;">
+                            <li>This must be done without hesitation to touch the wall or to delay reactivation.</li>
+                            <li>If the player purposely touches a ball before reactivation, the ball becomes dead.&nbsp;</li>
+                        </ol>
+                        <p>5. If a dead ball is thrown and then caught, it is considered a legal catch.<br><br>6.  Attempted catches: If a player attempts to catch a live ball thrown by  the opposing team, but drops it or allows it to touch any surface or  object, other than himself, &nbsp;before gaining full control, he is out.</p>
+                        <p style="text-indent: 36pt; margin-top: 0pt; margin-bottom: 0pt;" dir="ltr">1. If while trying to complete the catch, the player becomes out, the catch is void.</p>
+                        <p style="text-indent: 36pt; margin-top: 0pt; margin-bottom: 0pt;" dir="ltr">&nbsp;</p>
+                        <p>7.  Catches after blocks: It is considered a catch if an opponent’s ball  hits a blocking ball and is then caught by the blocker. The blocker,  however, must have the blocking ball in possession when making the  catch; otherwise he is out (see <em>Technical #6, #7</em>).<br><br>8.  If a ball deflects off a player’s body, only that player can make a  legal catch afterwards. The ball is dead if another player touches it,  or if it hits a surface or object before it is caught (see <em>Block #2</em>).</p>
+                        <p>9. In order to make a successful catch, a player must maintain possession of all balls held at the time of initial contact.</p>
+                        <p>10.  A double catch (and the odd triple catch) is legal if the balls have  not clearly contacted each other before they are caught; otherwise the  balls would become dead.</p>
+                        <p>11. In the case where a catch is made and no player walks off (e.g. the player didn’t see his ball get caught):</p>
+                        <ol style="margin-top: 0pt; margin-bottom: 0pt; list-style-type: square; margin: .5em 0 1em 3em; padding: 0; padding-left: 2em; color: black; font-weight: bold;">
+                            <li>If  the catch is observed by referees but the thrower cannot be determined,  the referees should pause the game and request for one of the throwers  to come off of the court. Referees can assist by indicating the side  that the ball might have come from. &nbsp;If no thrower is volunteered by the  throwing team, referees must come to a decision using all available  on-court information.</li>
+                            <br>
+                        </ol>
+                        <p>12. If a catch is missed by all referees entirely and no one leaves the court, there is no dispute and play continues.</p>
+                        <p>13. You cannot make a catch while holding a deadball (see <em>Dead Ball #12</em>).</p>
+                        <p>14. Clothing exception: if a player makes a catch, but loses an article of clothing during the process (e.g. a hat falls off, even with ball contact), the catch is still valid. There is no requirement to maintain possession of all worn garments during the catch; the player shall continue to be in the game.<br><br><strong>BLOCK</strong></p>
+                        <p>1. A block is when a player uses ball(s) in possession to keep himself from being hit.</p>
+                        <p>2. Failed Block (Deflection Exception): A player is out if:</p>
+                        <ol style="margin-top: 0pt; margin-bottom: 0pt; list-style-type: square; margin: .5em 0 1em 3em; padding: 0; padding-left: 2em; color: black; font-weight: bold;">
+                            <li>An opponent’s ball hits a player’s blocking ball and then hits the blocker’s body or clothing afterwards.</li>
+                            <li>A player drops his blocking ball(s) as a result of trying to block an opponent’s ball.</li>
+                            <li>A ball hits the blocker’s fingers or hand first, or after, while trying to block.</li>
+                            <br>
+                        </ol>
+                        <p>3. Catches after blocks (see <em>Catch #7</em>).</p>
+                        <p>4. Dead balls cannot be used for blocking. A player is out as soon as he blocks with a dead ball.<br><br><strong>DEAD BALL</strong></p>
+                        <p>1.  Dead ball: A ball that hits an object, surface or teammate before the  player, or a ball declared as a dead ball by the referee.</p>
+                        <p>2.  10 Second Holding Rule: The intention of the 10 Second Holding Rule is  to prevent stalling and encourage continuous play. Players can only hold  the ball for 10 seconds. After 10 seconds, the ball is dead and must be  turned over. It is the responsibility of players to know their ball’s countdown status.</p>
+                        <ol style="margin-top: 0pt; margin-bottom: 0pt; list-style-type: square; margin: .5em 0 1em 3em; padding: 0; padding-left: 2em; color: black; font-weight: bold;">
+                            <li>The 10 second count starts in these situations: <br class="kix-line-break">(a) when a player picks up a ball<br class="kix-line-break">(b) when a player holds down a ball that is on the ground for longer than 3 seconds<br class="kix-line-break">(c) when a player maneuvers a ball alongside himself on the ground to move to a different position on the court<br class="kix-line-break">(d) when the first ball is activated at the opening rush (see <em>Technical #1</em>).<br><br></li>
+                            <li>The 10 Second Rule does not start in these situations:<br class="kix-line-break">(a) when a player rolls a ball to another teammate (ball must not leave the ground)<br class="kix-line-break">(b) when a player rolls a ball back from the centerline<br class="kix-line-break">(c) when a player stops a moving ball.</li>
+                            <br>
+                        </ol>
+                        <p>3.  The 10 second count is announced: “Ten, nine, eight, seven, six, five,  four, three, two, one, dead ball.” The interval between the first  utterance of each number or word must be at least one second. The count  should be announced loudly enough for the player to hear, yet the onus  remains on the players to keep count themselves and to be aware of the  referee's count. If the player has not released the ball at the first  utterance of the word ‘dead ball’, the player must turn over the ball.</p>
+                        <p>4.  How to turn over a dead ball: A dead ball, after a 10 second count,  must be rolled over with the intention to touch the opposing team’s  wall, not just placed over the centerline. If a dead ball stops midway  from the centerline and the opposing team’s wall, the referee can  intervene to assist the turnover.</p>
+                        <p>5. Dead balls must be played by the receiving team before the other team can use it again.</p>
+                        <p>6. Countdowns on balls are stopped once they go out of bounds, and do not resume when the balls return to the court (see <em>Dead Ball #7</em>).</p>
+                        <p>7. Players cannot intentionally put balls out of bounds, or just over the centerline to reset the ball count. Those balls will be deemed as dead by the referee and must be turned over to the other team.</p>
+                        <p>8. When  a player is out for any reason, all balls under his possession are to  be dropped. Any countdowns on those balls are removed, unless any of  those balls have already been deemed as dead balls by the referees.</p>
+                        <p>9.  Dropped balls: Intentionally dropping or passing balls will not stop  the 10 second count. A player may drop a held ball in order to catch a  thrown ball, but the dropped ball is still counted down.</p>
+                        <p>10. High throws (AKA 6FT Rule): All balls thrown above 6FT that hit the opponent’s back wall are dead and must be turned over. In cases where a 6FT line is not indicated, a line or wall fixture will be established by Gym Leads prior to the game. If a player jumps, and is hit above the 6FT line,  that player is still out because the high ball hit the player and not  the wall.</p>
+                        <p>11.  If a team has all 6 balls on their court, and they are not being used  (i.e. all 6 balls are left on the ground), referees will begin a 10  second holding rule on the ball closest to the centerline until it is  played or turned over to the other team. If a player plays a ball, the  countdown is transferred to that ball.</p>
+                        <p>12.  If a player in possession of a dead ball makes a catch, that player  will be considered hit and the catch void. The dead ball must still be  turned over to the other team (see <em>Technical #14</em>)<br><br><strong>SHOWDOWN</strong></p>
+                        <p>1. If there is only 1 player left from each team, showdown goes  into effect after 10 seconds. The procedure for showdown is:</p>
+                        <ul style="margin-top: 0pt; margin-bottom: 0pt; list-style-type: square; margin: .5em 0 1em 3em; padding: 0; padding-left: 2em; color: black; font-weight: bold;">
+                            <li>Referees count down 10 seconds, ending with “showdown” to pause the game.</li>
+                            <li>The centerline boundary is dissolved, while the sidelines remain active boundaries. </li>
+                            <li>Players begin with 2 balls in their hands at their respective walls. </li>
+                            <li>The other 2 balls go at the ends of the centerline. </li>
+                            <li>When ready, showdown begins with a “3, 2, 1, showdown” from the referees. </li>
+                            <li>Tagging the opponent in a showdown will not count; balls must be released in order to hit someone out (see <em>Technical #8</em>).</li>
+                            <li>There is no 10 second dead ball count.</li>
+                            <li>If a victor can't be determined, then a showdown rematch will occur.</li>
+                        </ul>
+                        <p>&nbsp;<br><br><strong>TECHNICAL</strong></p>
+                        <p>1.  The ball countdown at the Opening Rush starts when the first of the 6  balls is activated. Once the countdown starts, the countdown applies to  all 6 balls (see <em>Dead Ball #2.1.d</em>).</p>
+                        <p>2.  An opposing team’s balls at the centerline can be taken once all of  your own team’s balls are activated, and they must also be activated  before they become live.</p>
+                        <p>3. If a player throws a ball at the opposing team while over the centerline during the Opening Rush, he will be called out.</p>
+                        <p>4. When catching, a player must be in full control of the ball without using any out of bounds area or floor as leverage.</p>
+                        <p>5. A player is not to use any part of his clothing, or assistive accessories to make a catch, or interfere with a thrown active ball. Otherwise, that player is out (See <em>Catch #14</em>).</p>
+                        <p>6.  When attempting to catch a blocked ball, a player must hold onto all  the balls that he had in possession of at the time of the block,  otherwise the player is out.</p>
+                        <p>7.  Countdown on balls is stopped once they go out of bounds and does not  resume when the balls return to the court. Balls purposely placed out of  bounds are exempt from the resetting of the count.</p>
+                        <p>8. Any physical contact with an opposing player will deem the player that initiated contact out.</p>
+                        <p>9. If a ball is thrown before the first utterance of “showdown”, or “dead ball”, the throw is considered legal.</p>
+                        <p>10.  A ball must be picked up in order for the release to be legal.  Smacking, spiking, kicking, or scooping a ball are not allowed, and the hit  won't count; however if caught by the opponent, the catch is legal.</p>
+                        <p>11. Players must line up next to the referees in the order they were knocked out.</p>
+                        <p>12.  Players return to the game in the order they were knocked out. (e.g.  Player A was hit out first. Player B was hit out second. Player B lines  up next to the referees before Player A. A catch was made by their  teammates but Player A has not lined up next to the referees, therefore  the catch does not bring anyone back in.)</p>
+                        <p>13.  Crushed balls: If a thrown ball hits an opponent or their wall and  rebounds squished, or unlike its original shape at the start of the  game, it will be deemed a crushed ball (see <em>Other Details #4</em>).  Throwing a crushed ball will result in the thrower being out.</p>
+                        <p>14. Catch Rule #7 supersedes Catch Rule #13 if the blocking ball becomes dead after the initial block. <br><br><strong>OTHER DETAILS</strong></p>
+                        <p>1. Substitutions and timeouts:</p>
+                        <ul style="margin-top: 0pt; margin-bottom: 0pt; list-style-type: square; margin: .5em 0 1em 3em; padding: 0; padding-left: 2em; color: black; font-weight: bold;">
+                            <li>Not  allowed during a game unless there is an injury. The same 6 players who  start a game shall end the game. Substitution may occur after each  individual game (i.e. when you switch sides).</li>
+                            <li>Only  substitutes (players who did not start the game) are eligible to  replace an injured player. A male substitute can only replace an injured  male player, but a female substitute can replace either an injured  male, or injured female player. In the case where no substitutes are  available, the team will play short, or forfeit the game if the injured  player is the last live player. Depending on the severity of the injury, Gym Leads reserves the right to ask an injured player to stop playing.</li>
+                            <li>For eligible substitute players, see <a href="http://playdodgeball.org/league-policies/">League Policies</a></li>
+                            <br>
+                        </ul>
+                        <p>2.  Honour System Officiating: it is ultimately up to the players to  enforce and uphold the rules of dodgeball when playing or refereeing.  Dodgeball relies on the honour system, in which officiating is  determined more between players and less from the referees. However, if  there is a controversial play, the referees will make the final call.  They have the right to stop a game and discuss the incident before  proceeding. In respect for the spirit of the game and for fellow  players, there is absolutely no protesting allowed. However we encourage  players to discuss and clarify any plays in a respectful manner with  referees and Gym Leads after the game is finished.</p>
+                        <p>3. Ball treatment: No kicking, crushing, dunking, or playing basketball with the dodgeballs is allowed.</p>
+                        <p>4. Kicking a ball at an opponent during a game or in a showdown will result in the kicker being called out.</p>
+                        <p>5. Players are not allowed to intentionally interfere with the opponents during the opening rush.</p>
+                        <p>6.  Any discrepancies regarding plays and situations that are not  documented in the official IDA rules will be decided by the Gym Leads. <br><br><strong>ATTIRE &amp; SAFETY</strong></p>
+                        <p>1. Players must wear proper gym strip. Shirtless play is not allowed. Clothing must not endanger the safety of other players.</p>
+                        <p>2.  Players may not use clothing or accessories to provide unfair  advantage, or unfairly inhibit or assist the movement of the ball to  make a catch or throw.</p>
+                        <p>3. Clothing (uniforms and accessories) is considered part of a player’s body. However, fallen off garments not attached to a body cannot be hit, or called out.</p>
+                        <p>4. Players are not allowed to play with gloves, bare hands only. Wraps for supporting recovering injuries are acceptable.</p>
+                        <p>5. Players  without proper footwear are not permitted to play. &nbsp;For example,  sandals, slippers, flip flops, marking shoes, dress shoes, and going  barefoot are not allowed. &nbsp;</p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
