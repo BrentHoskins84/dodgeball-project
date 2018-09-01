@@ -72,3 +72,8 @@ class PlayerCreateView(FormView):
 class PlayerListView(ListView):
     template_name = 'player_list.html'
     queryset = Player.objects.all()
+
+
+class PrivateTeamlistView(ListView):
+    template_name = 'private_team_list.html'
+    queryset = Team.objects.all()

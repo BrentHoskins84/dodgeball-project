@@ -10,6 +10,6 @@ urlpatterns = [
 
     path('create-player/', PlayerCreateView.as_view(), name='player-create'),
     path('players/', PlayerListView.as_view(), name='player-list'),
-
+    path('private/team-list/', PrivateTeamlistView.as_view(), name='private'),
 
 ]
