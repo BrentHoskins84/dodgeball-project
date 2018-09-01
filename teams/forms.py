@@ -30,6 +30,7 @@ class TeamCreateModelForm(forms.Form):
     team_passcode = forms.CharField(widget=forms.PasswordInput)
     player_first_name = forms.CharField()
     player_last_name = forms.CharField()
+    player_nationality = forms.CharField()
     players_email = forms.EmailField()
     phone_Number = forms.CharField()
 
@@ -57,6 +58,7 @@ class PlayerCreateModelForm(forms.Form):
     team_passcode = forms.CharField(widget=forms.PasswordInput)
     player_first_name = forms.CharField()
     player_last_name = forms.CharField()
+    player_nationality = forms.CharField()
     players_email = forms.EmailField()
     phone_Number = forms.CharField()
 

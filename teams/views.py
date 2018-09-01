@@ -26,6 +26,7 @@ class TeamCreateView(FormView):
         player.team = team
         player.first_name = form.cleaned_data['player_first_name']
         player.last_name = form.cleaned_data['player_last_name']
+        player.nationality = form.cleaned_data['player_nationality']
         player.email = form.cleaned_data['players_email']
         player.phone_number = form.cleaned_data['phone_Number']
         player.save()
@@ -60,6 +61,7 @@ class PlayerCreateView(FormView):
         player.team = team
         player.first_name = form.cleaned_data['player_first_name']
         player.last_name = form.cleaned_data['player_last_name']
+        player.nationality = form.cleaned_data['player_nationality']
         player.email = form.cleaned_data['players_email']
         player.phone_number = form.cleaned_data['phone_Number']
         player.save()

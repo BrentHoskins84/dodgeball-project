@@ -17,7 +17,6 @@ class Team(models.Model):
         return reverse('teams:team-detail', kwargs={'id': self.id})
 
 
-
 class TeamPasscode(models.Model):
     team = models.OneToOneField('Team', on_delete=models.CASCADE, related_name="passcode")
     passcode = models.CharField(max_length=4, unique=True)
@@ -29,6 +28,7 @@ class TeamPasscode(models.Model):
 class Player(models.Model):
     first_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
+    nationality = models.CharField(max_length=256, null=True)
     email = models.EmailField(max_length=54, unique=True)
     PHONE_REGEX = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '999999999', with no spaces. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[PHONE_REGEX], max_length=17, blank=True) # validators should be a list
@@ -36,15 +36,3 @@ class Player(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
-
-
-# def gen_passcode():
-#     return '9876'
-#
-# @receiver(post_save, sender=Team)
-# def create_passcode(sender, instance, created, **kwargs):
-#     if created:
-#         tp = TeamPasscode()
-#         tp.team = instance
-#         tp.passcode = gen_passcode()
-#         tp.save()

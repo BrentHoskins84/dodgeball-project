@@ -8,19 +8,8 @@
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
         <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
         <style media="screen">
-
-            body{
-              margin: 0;
-              padding: 0;
-              box-sizing: border-box;
-            }
-
             .jumbotron{
 
                 background-image: url({% static 'images/uncle-sam2.jpg' %});
@@ -29,8 +18,7 @@
                 background-size: cover;
             }
 
-            .jumbotron h1, p {
-                /* margin-left: 2rem; */
+            /* .jumbotron h1, p {
                 color: black;
                 font-weight: bold;
             }
@@ -55,13 +43,18 @@
                 color: #666;
                 text-align: center;
                 font: 128px Arial, sans-serif;
+            } */
+            /* .svg-container {
+            	display: inline-block;
+            	position: relative;
+            	width: 100%;
+            	vertical-align: middle;
+            	overflow: hidden;
             }
-
-            /* ul {
-                list-style-type: square;
-                margin: .5em 0 1em 3em;
-                padding: 0;
-                padding-left: 2em;
+            .pygal-chart {
+            	display: inline-block;
+            	top: 0;
+            	left: 0;
             } */
         </style>
 
@@ -102,7 +95,7 @@
                         <p class="lead">"If you can dodge a wrench, you can dodge a ball." - Patches O'Houlihan</p>
                         <hr class="my-4">
                         <p>The US Contingent would like to invite you to join us for a International DodgeBall Tournament.</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#team_modal">SIGN UP</button>
+                        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#team_modal">SIGN UP</button>
                     </div>
                 </div>
             </div>
@@ -128,10 +121,9 @@
         </div>
 
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-4 col-lg-4 col-md-6 col-xs-4 col-md-push-4">
                     <div class="card-body d-flex flex-column align-items-start">
-                        <strong class="d-inline-block mb-2 text-primary">Teams</strong>
                         <h3 class="mb-0">
                             <a class="text-dark" href="{% url 'teams:team-list' %}">Total Teams</a>
                         </h3>
@@ -139,19 +131,29 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-sm-4 col-lg-4 col-md-6 col-xs-4 col-md-push-4">
                     <div class="card-body d-flex flex-column align-items-start">
-                        <strong class="d-inline-block mb-2 text-primary">Players</strong>
                         <h3 class="mb-0">
                             <a class="text-dark" href="{% url 'teams:player-list' %}">Total Players</a>
                         </h3>
                         <div class="numberCircle">{{ player|length }} </div>
                     </div>
                 </div>
+                <div class="col-sm-4 col-lg-4 col-md-12 col-xs-4 col-md-push-4">
+                    <div class="card-body d-flex flex-column align-items-start">
+                        <h3 class="mb-0">
+                            <a class="text-dark" href="#">Nationalities</a>
+                        </h3>
+                        <div class="svg-container">
+                            {{ cht_nat|safe }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-
+        <br>
+        <br>
         <div role="main" class="container-fluid">
             <div class="row">
                 <div class="col-sm-6 col-lg-6 col-md-6 col-xs-6">
@@ -319,10 +321,19 @@
                     </div>
                 </div>
                 <div class="col-sm-4 col-lg-4 col-md-4 col-xs-4">
+                    <div class="">
+                        <br>
+                        <br>
+                    </div>
                     <iframe style="margin-left: 3rem;" width="400" height="300" src="https://www.youtube.com/embed/bJ1vEQKX-hE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
 
     </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
+
 </html>

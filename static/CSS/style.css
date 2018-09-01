@@ -4,3 +4,57 @@
   padding: 0;
   box-sizing: border-box;
 }
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.jumbotron{
+
+    background-image: url({% static 'images/uncle-sam2.jpg' %});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.jumbotron h1, p {
+    /* margin-left: 2rem; */
+    color: black;
+    font-weight: bold;
+}
+.jumbotron button{
+    margin-left: 2rem;
+}
+
+.lead{
+    color: black;
+    font-weight: bold;
+}
+
+.numberCircle {
+    margin-top: 1rem;
+    border-radius: 50%;
+    behavior: url(PIE.htc);
+    width: 15rem;
+    height: 15rem;
+    padding: 2px;
+    background: #fff;
+    border: 5px solid #666;
+    color: #666;
+    text-align: center;
+    font: 200px Arial, sans-serif;
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    vertical-align: middle;
+    overflow: hidden;
+}
+.pygal-chart {
+    display: inline-block;
+    top: 0;
+    left: 0;
+}
