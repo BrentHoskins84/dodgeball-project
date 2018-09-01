@@ -11,34 +11,41 @@
 
 
     <body>
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <a class="navbar-brand" href="{% url 'index' %}">SAMS II</a>
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Brackets</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="{% url 'teams:team-list' %}">Teams</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav form-inline">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin:index' %}">ADMIN</a>
-                        </li>
-                    </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-md-12 col-xs-12">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                            <a class="navbar-brand" href="{% url 'index' %}">SAMS II</a>
+                            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link disabled" href="#">Brackets</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link disabled" href="{% url 'teams:team-list' %}">Teams</a>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav form-inline">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'admin:index' %}">ADMIN</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
                 </div>
-            </nav>
+            </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-md-12 col-xs-12">
+                    {% block body_block %}
 
-            {% block body_block %}
-
-            {% endblock%}
+                    {% endblock%}
+                </div>
+            </div>
         </div>
     </body>
 </html>
