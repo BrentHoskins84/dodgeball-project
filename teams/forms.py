@@ -65,7 +65,7 @@ class PlayerCreateModelForm(forms.Form):
     def clean_team_passcode(self):
         data = self.cleaned_data['team_passcode']
         if not TeamPasscode.objects.filter(passcode=data).exists():
-            raise forms.ValidationError('this passcode does not exist, please re-enter your team passcode.')
+            raise forms.ValidationError('That is not the correct passcode for this team, please re-enter your team passcode.')
         return data
 
     def clean_players_email(self):

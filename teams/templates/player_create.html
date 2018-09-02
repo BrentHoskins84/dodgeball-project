@@ -5,6 +5,14 @@
             {% bootstrap_messages %}
                 <br>
                 <h2>Player</h2>
+                <ol>
+                    <li>Team Passcode - Was created when the team captain created the team, this is used to add you to the team</li>
+                    <li>Player First Name -  Your first name</li>
+                    <li>Player Last Name - Your Surname</li>
+                    <li>Player Nationality - Your home country (USA, GER, POL, EST)</li>
+                    <li>Email - Your personal email (Email you check regularly)</li>
+                    <li>Phone Number - Good contact number</li>
+                </ol>
                 <form method="post" class="form">
                   {% csrf_token %}
                   {% bootstrap_form form layout='inline' %}

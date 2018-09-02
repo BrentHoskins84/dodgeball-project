@@ -1,9 +1,11 @@
+from django.conf import settings
+# from django.contrib import message
+from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView, DeleteView, UpdateView, ListView, DetailView, FormView
+# from django.http import HttpResponse
 from .models import Team, Player, TeamPasscode
 from .forms import TeamModelForm, PlayerModelForm, TeamCreateModelForm, PlayerCreateModelForm
-from django.http import HttpResponse
-
 
 class TeamCreateView(FormView):
     template_name = 'team_create.html'
@@ -19,17 +21,17 @@ class TeamCreateView(FormView):
         team.save()
         passcode = TeamPasscode()
         passcode.team = team
-        print(form.cleaned_data['team_passcode'])
         passcode.passcode = form.cleaned_data['team_passcode']
         passcode.save()
         player = Player()
         player.team = team
         player.first_name = form.cleaned_data['player_first_name']
         player.last_name = form.cleaned_data['player_last_name']
-        player.nationality = form.cleaned_data['player_nationality']
+        player.nationality = form.cleaned_data['player_nationality'].upper()
         player.email = form.cleaned_data['players_email']
         player.phone_number = form.cleaned_data['phone_Number']
         player.save()
+        send_email(team, passcode, player)
         return super(TeamCreateView, self).form_valid(form)
 
 
@@ -61,7 +63,7 @@ class PlayerCreateView(FormView):
         player.team = team
         player.first_name = form.cleaned_data['player_first_name']
         player.last_name = form.cleaned_data['player_last_name']
-        player.nationality = form.cleaned_data['player_nationality']
+        player.nationality = form.cleaned_data['player_nationality'].upper()
         player.email = form.cleaned_data['players_email']
         player.phone_number = form.cleaned_data['phone_Number']
         player.save()
@@ -77,3 +79,11 @@ class PlayerListView(ListView):
 class PrivateTeamlistView(ListView):
     template_name = 'private_team_list.html'
     queryset = Team.objects.all()
+
+
+def send_email(team, passcode, player):
+    subject = 'Thank you for signing up for the US International Dodgeball Tournament'
+    message = f'Your team name is: {team.name} \n  your team passcode is: {passcode.passcode} \n \n You will need to give the team passcode to your teammates. With out this passcode they will not be able to join your team. \n \n \n Thank You \n US Contengient \n SAMS II / Raising 6 / Top 3 '
+    from_email = settings.EMAIL_HOST_USER
+    to_list = [player.email, settings.EMAIL_HOST_USER]
+    send_mail(subject, message, from_email, to_list, fail_silently=False)

@@ -22,10 +22,13 @@
                             <a class="navbar-brand" href="{% url 'index' %}">SAMS II</a>
                             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link disabled" href="#">Brackets</a>
+                                    <a class="nav-link" href="{% url 'teams:team-list' %}">Teams</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link disabled" href="{% url 'teams:team-list' %}">Teams</a>
+                                    <a class="nav-link" href="{% url 'teams:player-list' %}">Players</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link disabled" href="#">Brackets</a>
                                 </li>
                             </ul>
                             <ul class="navbar-nav form-inline">
