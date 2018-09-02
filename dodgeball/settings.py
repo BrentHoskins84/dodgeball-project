@@ -30,11 +30,11 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['Brenthoskins84.pythonanywhere.com']
 
-# #SandBox
+# # #SandBox
 # # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-#
-# ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = []
 
 
 # Eamil with Sendgrid
