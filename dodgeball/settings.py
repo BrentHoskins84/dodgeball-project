@@ -24,15 +24,15 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '_!_5nb9nz2l-!cboi5-8sljalp1ytyj_jnbam(6*wwi7)g1_fi'
 
-# production
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['Brenthoskins84.pythonanywhere.com']
-
-# # #SandBox
+# # production
 # # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+# DEBUG = False
+#
+# ALLOWED_HOSTS = ['Brenthoskins84.pythonanywhere.com']
+
+# #SandBox
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
 
 ALLOWED_HOSTS = []
 

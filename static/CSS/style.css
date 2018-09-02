@@ -58,3 +58,9 @@ body{
     top: 0;
     left: 0;
 }
+
+.resp-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
