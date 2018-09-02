@@ -21,4 +21,5 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('admin/', admin.site.urls),
     path('teams/', include('teams.urls')),
+    path('rules/', RuleView.as_view(), name='rules'),
 ]

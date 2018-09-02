@@ -34,7 +34,8 @@ class IndexView(TemplateView):
         return context
 
 
-
+class RuleView(TemplateView):
+    template_name = 'rules.html'
 
 
 
