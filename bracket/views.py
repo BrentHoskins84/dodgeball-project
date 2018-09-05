@@ -1,34 +1,20 @@
-from django.template import loader
-from django.shortcuts import render
-from django.views.generic import CreateView, ListView
+from django.views.generic import ListView
 from bracket.models import Match, Tournament
-from teams.models import Player
 
-from django.http import HttpResponse
-import json
 
 # Create your views here.
+# def replace_none(self):
+#     for i in context['match_list']:
+#         if self.team_1_score == None:
+#             context['match_list'].append()
 
 # class BracketView(ListView):
-def BracketView(request, id):
-    template = loader.get_template('bracket.html')
-    queryset = Match.objects.all()
-    tournament = Tournament.objects.filter(id=id).prefetch_related("tournament").get()
-    teams, results = get_bracket_info(Match)
+class BracketView(ListView):
+    template_name = 'match_list.html'
+    # queryset = Match.objects.all()
+    model = Match
 
-
-    context = {
-        'tournament': tournament,
-        'teams':json.dumps(teams),
-        'results': json.dumps(results)
-    }
-    return HttpResponse(template.render(context, request))
-
-def get_bracket_info(Match):
-    results = []
-    teams = list(map(lambda x:x.get_player_names(), Match.objects.filter(round=1).order_by('match_id')))
-
-    for r in range(1, Match.round+1):
-        results.append(list(map(lambda x: x.get_result_values(), matches.objects.filter(round=r).order_by('match_id'))))
-
-    return teams, results
+    def get_context_data(self, *args, **Kwargs):
+        context = super(BracketView, self).get_context_data(*args, **Kwargs)
+        context['match_list'] = Match.objects.all()
+        return context

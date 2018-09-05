@@ -4,5 +4,5 @@ from .views import BracketView
 app_name = 'teams'
 
 urlpatterns = [
-    path('<int:id>/', BracketView, name='bracket-list'),
+    path('', BracketView.as_view(), name='bracket-list'),
 ]

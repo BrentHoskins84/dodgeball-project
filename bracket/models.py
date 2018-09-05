@@ -1,6 +1,6 @@
 from django.db import models
-
 from teams.models import Team
+
 
 # Create your models here.
 class Tournament(models.Model):
@@ -16,33 +16,28 @@ class Tournament(models.Model):
 
 
 
+
 class Match(models.Model):
     class Meta:
         verbose_name_plural = "Matches"
 
-    match_id = models.AutoField(primary_key=True, name='match_id')
-    tournament = models.ForeignKey(Tournament, on_delete=models.PROTECT, related_name='tournament')
-    team_1 = models.OneToOneField(Team, on_delete=models.CASCADE, related_name="player_1", unique=False)
-    team_2 = models.OneToOneField(Team, on_delete=models.CASCADE, related_name="player_2", unique=False)
-    team_1_score = models.IntegerField(name='team_1_score', null=True, blank=True, unique=False)
-    team_2_score = models.IntegerField(name='team_2_score', null=True, blank=True, unique=False)
-    # start_time = models.DateTimeField(null=True, blank=True, name='time')
-    round = models.IntegerField(name='round', null=True, blank=True, unique=False)
+    MATCH_STATUS = [
+        ("BYE", 'BYE'),
+        ("Not Scheduled", 'Not Scheduled'),
+        ("Scheduled", "Scheduled"),
+        ('Finished', 'Finished')
+    ]
+
+    tournament = models.ForeignKey(Tournament, on_delete=models.PROTECT, related_name='matches')
+    team_1 = models.OneToOneField(Team, on_delete=models.CASCADE, related_name="team_1", unique=False)
+    team_2 = models.OneToOneField(Team, on_delete=models.CASCADE, related_name="team_2", unique=False)
+    status = models.CharField(max_length=20, choices=MATCH_STATUS, default='Not Scheduled')
+    team_1_score = models.PositiveIntegerField(null=True, blank=True, name='team_1_score', default=0)
+    team_2_score = models.PositiveIntegerField(null=True, blank=True, name='team_2_score', default=0)
+    start_time = models.DateTimeField(null=True, blank=True, name='time')
+    match_round = models.IntegerField(default=1)
     winner = models.OneToOneField(Team, on_delete=models.CASCADE, related_name='match_winner', null=True, blank=True, unique=False)
 
 
     def __str__(self):
-        return 'Match %s' % (self.match_id)
-
-    def get_player_names(self):
-        return [str(self.team_1) if self.team_1 else None, str(self.team_2) if self.team_2 else None,]
-
-    def set_winner(self):
-        if self.team_1_score > self.team_2_score:
-            self.winner = self.team_1
-        else:
-            self.winner = self.team_2
-
-
-    def get_result_values(self):
-        return [self.team_1_score, self.team_2_score,]
+        return "{} - {} vs {}".format(self.id, self.team_1, self.team_2)

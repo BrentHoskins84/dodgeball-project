@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+    {% extends "base/base.html" %}
+    {% load static %}
+        {% block body_block %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bracket/0.11.1/jquery.bracket.min.css" />
+            <h2>Bracket</h2>
+            <div class="demo">
+
+            </div>
+            <div class="saveOutput">
+
+            </div>
+            <script src="https://code.jquery.com/jquery-1.6.2.min.js" integrity="sha256-0W0HoDU0BfzslffvxQomIbx0Jfml6IlQeDlvsNxGDE8=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bracket/0.11.1/jquery.bracket.min.js"></script>
+            <script>
+
+                // var jquery_1_6_2 = $.noConflict(true);
+                var singleElimination = {
+                    "teams": [
+                        {% for match in match_list %}
+                            {% if match.match_round == 1%}
+                                ["{{ match.team_1.name }}", "{{ match.team_2.name }}"]
+                                {% if not forloop.last %}
+                                ,
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    ],
+                    "results": [
+                                    [
+                                        [
+                                            {% for match in match_list %}
+                                                {% if match.match_round == 1%}
+                                                    [{{ match.team_1_score}}, {{ match.team_2_score}}]
+                                                    {% if not forloop.last %}
+                                                    ,
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        ],
+                                        [
+                                            {% for match in match_list %}
+                                                {% if match.match_round == 2 %}
+                                                    [{{ match.team_1_score}}, {{ match.team_2_score}}]
+                                                    {% if not forloop.last %}
+                                                    ,
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        ],
+                                    ]
+                                ]
+                }
+
+                function saveFn(data, userData) {
+                    console.log(data)
+                //   // var json = jQuery.JSON.stringify(data)
+                //   // $('#saveOutput').text('POST '+userData+' '+json)
+                //   // /* You probably want to do something like this*/
+                //   // jQuery.ajax("rest/"+userData, {contentType: 'application/json',
+                //   //                               dataType: 'json',
+                //   //                               type: 'post',
+                //   //                               data: json})
+                }
+
+                $('.demo').bracket({
+                    teamWidth: 150,
+                    scoreWidth: 40,
+                    matchMargin: 100,
+                    roundMargin: 75,
+                    skipConsolationRound: true,
+                    // centerConnectors: true,
+                    save: saveFn,
+                    init: singleElimination
+                });
+            </script>
+        {% endblock %}
