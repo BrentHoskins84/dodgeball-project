@@ -17,6 +17,9 @@ class Tournament(models.Model):
 
 
 class Match(models.Model):
+    class Meta:
+        verbose_name_plural = "Matches"
+
     match_id = models.AutoField(primary_key=True, name='match_id')
     tournament = models.ForeignKey(Tournament, on_delete=models.PROTECT, related_name='tournament')
     team_1 = models.OneToOneField(Team, on_delete=models.CASCADE, related_name="player_1", unique=False)
@@ -32,7 +35,7 @@ class Match(models.Model):
         return 'Match %s' % (self.match_id)
 
     def get_player_names(self):
-        return [str(self.player_1) if self.player_1 else None, str(self.player_2) if self.player_2 else None,]
+        return [str(self.team_1) if self.team_1 else None, str(self.team_2) if self.team_2 else None,]
 
     def set_winner(self):
         if self.team_1_score > self.team_2_score:
