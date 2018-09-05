@@ -19,7 +19,9 @@ from .views import *
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
+    path('rules/', RuleView.as_view(), name='rules'),
     path('admin/', admin.site.urls),
     path('teams/', include('teams.urls')),
-    path('rules/', RuleView.as_view(), name='rules'),
+    path('bracket/', include('bracket.urls')),
+
 ]

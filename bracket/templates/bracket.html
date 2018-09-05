@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+    {% extends "base/base.html" %}
+    {% load static %}
+        {% block body_block %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bracket/0.11.1/jquery.bracket.min.css" />
+            <h2>List of matches</h2>
+            <div class="list-group">
+                <ol>
+                    {% for match in object_list %}
+                        <li>{{ match.match_id }}  / {{match.time}} &nbsp;</li>
+                        <ul>
+                            <li>{{match.team_1}} vs {{match.team_2}}</li>
+                            <li>Winner {{match.winner}}</li>
+                        </ul>
+
+                    {% endfor %}
+                </ol>
+            </div>
+            <div class="demo">
+
+            </div>
+
+
+            <script src="https://code.jquery.com/jquery-1.6.2.min.js" integrity="sha256-0W0HoDU0BfzslffvxQomIbx0Jfml6IlQeDlvsNxGDE8=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bracket/0.11.1/jquery.bracket.min.js"></script>
+            <script>
+
+                // var jquery_1_6_2 = $.noConflict(true);
+                var singleElimination = {
+                    "teams": [              // Matchups
+                        ["Team 1", "Team 2"], // First match
+                        ["Team 3", "Team 4"]  // Second match
+                    ],
+                    "results": [            // List of brackets (single elimination, so only one bracket)
+                        [                     // List of rounds in bracket
+                          [                   // First round in this bracket
+                            [1, 2],           // Team 1 vs Team 2
+                            [3, 4]            // Team 3 vs Team 4
+                          ],
+                          [                   // Second (final) round in single elimination bracket
+                            [5, 6],           // Match for first place
+                            [7, 8]            // Match for 3rd place
+                          ]
+                        ]
+                    ]
+                }
+
+                $('.demo').bracket({
+                    init: singleElimination
+                });
+                $('.demo').bracket({
+                  init: null, // data to initialize
+                  save: null, // called whenever bracket is modified
+                  userData: null, // custom user data
+                  onMatchClick: null, // callback
+                  onMatchHover: null, // callback
+                  decorator: null, // a function
+                  skipSecondaryFinal: false,
+                  skipGrandFinalComeback: false,
+                  skipConsolationRound: false,
+                  dir: 'rl', // "rl" or  "lr",
+                  disableToolbar: false,
+                  disableTeamEdit: false,
+                  teamWidth: '', // number
+                  scoreWidth: '', // number
+                  roundMargin: '', // number
+                  matchMargin: '', // number
+                });
+            </script>
+
+
+            <!-- <script>
+                var jquery_1_6_2 = $.noConflict(true);
+                var minimalData = {
+                    teams : [
+                      ["Team 1", "Team 2"], /* first matchup */
+                      ["Team 3", "Team 4"]  /* second matchup */
+                    ],
+                    results : [
+                      [[1,2], [3,4]],       /* first round */
+                      [[4,6], [2,1]]        /* second round */
+                    ]
+                  }
+
+                $(function() {
+                    $('#minimal .demo').bracket({
+                      init: minimalData /* data to initialize the bracket with */ })
+                  })
+            </script> -->
+        {% endblock %}
