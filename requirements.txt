@@ -1,0 +1,4 @@
+Pillow 5.2.0
+Django
+bootstrap 4
+pygal
