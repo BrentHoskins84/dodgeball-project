@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+    {% extends "base/base.html" %}
+    {% load static %}
+        {% block body_block %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bracket/0.11.1/jquery.bracket.min.css" />
+            <h2>Bracket</h2>
+            <!-- <div class="bracket">
+
+            </div> -->
+            {% if teams|length == 2 %}
+                <h1>Bracket has not been created yet, please check back later</h1>
+            {% else %}
+                <div class="bracket">
+
+                </div>
+            {% endif %}
+            <div class="saveOutput">
+
+            </div>
+            <script src="https://code.jquery.com/jquery-1.6.2.min.js" integrity="sha256-0W0HoDU0BfzslffvxQomIbx0Jfml6IlQeDlvsNxGDE8=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bracket/0.11.1/jquery.bracket.min.js"></script>
+            <script>
+                var singleElimination = {
+                    "teams": JSON.parse('{{teams|safe}}'),
+                    "results": JSON.parse('{{results|safe}}')
+                };
+
+                function saveFn(data, userData) {
+                    console.log(data)
+                //   // var json = jQuery.JSON.stringify(data)
+                //   // $('#saveOutput').text('POST '+userData+' '+json)
+                //   // /* You probably want to do something like this*/
+                //   // jQuery.ajax("rest/"+userData, {contentType: 'application/json',
+                //   //                               dataType: 'json',
+                //   //                               type: 'post',
+                //   //                               data: json})
+                }
+
+                $('.bracket').bracket({
+                    teamWidth: 150,
+                    scoreWidth: 40,
+                    matchMargin: 100,
+                    roundMargin: 75,
+                    skipConsolationRound: true,
+                    // centerConnectors: true,
+                    disableToolbar: true,
+                    save: saveFn,
+                    init: singleElimination
+                });
+            </script>
+        {% endblock %}

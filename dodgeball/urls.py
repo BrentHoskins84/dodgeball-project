@@ -22,6 +22,6 @@ urlpatterns = [
     path('rules/', RuleView.as_view(), name='rules'),
     path('admin/', admin.site.urls),
     path('teams/', include('teams.urls')),
-    path('bracket/', include('bracket.urls'), name='bracket'),
+    path('bracket/', include('bracket.urls')),
 
 ]
