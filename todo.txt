@@ -1,0 +1,3 @@
+- check for byes and make sure they are the first or last item in the list
+- Connect the jquery save function to the model to save second level matches (or we just do not save these matches)
+- Make it so that you can have more then one team name on a team column (I.E team_1 = Test 1 twice)

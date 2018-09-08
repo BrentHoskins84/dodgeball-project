@@ -10,6 +10,8 @@ from django.db.models.signals import post_save
 # Create your models here.
 class Team(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    seed = models.PositiveIntegerField(null=True, blank=True, name='seed')
+
 
     def __str__(self):
         return '%s' % (self.name)
