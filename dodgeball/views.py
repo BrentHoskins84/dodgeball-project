@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from teams.models import Team, Player
+from bracket.models import Team, Player
 from django.views.generic import TemplateView
 
 from .charts import NationalityPieChart

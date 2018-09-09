@@ -1,6 +1,5 @@
 import pygal
-
-from teams.models import Team, Player
+from bracket.models import Team, Player
 
 class NationalityPieChart():
 

@@ -1,10 +1,8 @@
 from django.conf import settings
-# from django.contrib import message
 from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView, DeleteView, UpdateView, ListView, DetailView, FormView
-# from django.http import HttpResponse
-from .models import Team, Player, TeamPasscode
+from bracket.models import Team, Player, TeamPasscode, Tournament
 from .forms import TeamModelForm, PlayerModelForm, TeamCreateModelForm, PlayerCreateModelForm
 
 class TeamCreateView(FormView):
@@ -15,9 +13,13 @@ class TeamCreateView(FormView):
         return '/'
 
     def form_valid(self, form):
-        # print(form.cleaned_data)
+        tournament = Tournament.objects.all()
+        for t in tournament:
+            _tour = t
+        print(tournament)
         team = Team()
         team.name = form.cleaned_data['team_name']
+        team.tournament = _tour
         team.save()
         passcode = TeamPasscode()
         passcode.team = team
@@ -42,7 +44,7 @@ class TeamListView(ListView):
 
 class TeamDetailView(DetailView):
     template_name = 'team_detail.html'
-    # queryset = Team.objects.all()
+    queryset = Team.objects.all()
 
     def get_object(self):
         id_ = self.kwargs.get('id')
